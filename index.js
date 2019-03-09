@@ -22,7 +22,7 @@ function readAndParseFileInZip(zip, filePath) {
 
 module.exports.readSketchFile = async filePath => {
   const data = await readFile(filePath)
-  const zip = await JSZip.loadAsync(data)
+  const zip = await jszip.loadAsync(data)
 
   const pagesPromises = []
   zip
@@ -64,7 +64,7 @@ module.exports.readSketchFile = async filePath => {
   }
 }
 
-module.exports.createNewSketchFile = (documentId, pages) => {
+module.exports.createNewSketchFile = (documentId, pages, version) => {
   if (!documentId) {
     documentId = require('./generateId')()
   }
@@ -78,7 +78,7 @@ module.exports.createNewSketchFile = (documentId, pages) => {
 
   return {
     document: require('./json/document')(documentId, pages),
-    meta: require('./json/meta')(pages),
+    meta: require('./json/meta')(pages, version),
     user: require('./json/user')(pages),
     pages: pages.map((p, i) => require('./json/page')(p, i)),
     images: {},
@@ -87,11 +87,16 @@ module.exports.createNewSketchFile = (documentId, pages) => {
 
 module.exports.writeSketchFile = ({ document, meta, user, pages, images }, filePath) => {
   const zip = new jszip()
+  pages.forEach(p => zip.file(`pages/${p.do_objectID}.json`, JSON.stringify(p)))
+  document.pages = pages.map(page => ({
+    _class: 'MSJSONFileReference',
+    _ref_class: 'MSImmutablePage',
+    _ref: `pages/${page.do_objectID}`,
+  }))
   zip.file('document.json', JSON.stringify(document))
   zip.file('meta.json', JSON.stringify(meta))
   zip.file('user.json', JSON.stringify(user))
-  pages.forEach(p => zip.file(`pages/${p.do_objectID}.json`, JSON.stringify(p)))
-  Object.keys(images).forEach(id => zip.file(`images/${id}.png`, images[id]))
+  Object.keys(images).forEach(id => zip.file(`images/${id}`, images[id]))
 
   return new Promise((resolve, reject) => {
     zip
