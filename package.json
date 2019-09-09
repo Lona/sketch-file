@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Methods to make is easier to manipulate a Sketch file",
   "main": "index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
