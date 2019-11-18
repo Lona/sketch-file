@@ -23,41 +23,41 @@ There are 4 different methods available:
 
 ```js
 (filePath: string) => Promise<{
-  document: {},
-  meta: {},
-  user: {},
-  pages: Array<{}>,
-  images: {
-    [id: string]: Buffer
-  }
+    document: FileFormat.Document;
+    meta: FileFormat.Meta;
+    user: FileFormat.User;
+    pages: FileFormat.Page[];
+    images: {
+        [id: string]: Buffer;
+    };
 }>
 ```
 
 ### `createNewSketchFile`
 
 ```js
-(documentId?: string, pages?: Array<{}>) => Promise<{
-  document: {},
-  meta: {},
-  user: {},
-  pages: Array<{}>,
-  images: {
-    [id: string]: Buffer
-  }
-}>
+(version?: string) => {
+    document: FileFormat.Document;
+    meta: FileFormat.Meta;
+    user: FileFormat.User;
+    pages: FileFormat.Page[];
+    images: {
+        [id: string]: Buffer;
+    };
+}
 ```
 
 ### `writeSketchFile`
 
 ```js
-(sketchDocument: {
-  document: {},
-  meta: {},
-  user: {},
-  pages: Array<{}>,
-  images: {
-    [id: string]: Buffer
-  }
+({ document, meta, user, pages, images, }: {
+    document: FileFormat.Document;
+    meta: FileFormat.Meta;
+    user: FileFormat.User;
+    pages: FileFormat.Page[];
+    images: {
+        [id: string]: Buffer;
+    };
 }, filePath: string) => Promise<void>
 ```
 
