@@ -1,6 +1,6 @@
 {
   "name": "sketch-file",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Methods to make is easier to manipulate a Sketch file",
   "main": "index.js",
   "types": "./index.d.ts",
@@ -14,6 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "@sketch-hq/sketch-file-format-ts": "^3.0.0",
+    "@sketch-hq/sketch-reference-files": "^2.0.0",
     "@types/jszip": "^3.1.6",
     "@types/node": "^12.12.8",
     "@types/seedrandom": "^2.4.28",
@@ -21,7 +22,6 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@sketch-hq/sketch-reference-files": "^2.0.0",
     "jszip": "^3.2.2",
     "seedrandom": "^3.0.5"
   }
