@@ -11,6 +11,7 @@ const map = referenceFiles.reduce((prev, x) => {
 }, {})
 
 const typeMap = {
+  118: 1,
   119: 1,
   120: 2,
   121: 3,
@@ -20,7 +21,21 @@ fs.mkdirSync(path.join(__dirname, '../src/json'), { recursive: true })
 
 fs.writeFileSync(
   path.join(__dirname, '../src/json/map.ts'),
-  `export default ${JSON.stringify(map, null, '  ')}`,
+  `export default ${JSON.stringify(map, null, '  ')}
+
+export type VersionFileFormat1 = ${Object.keys(map)
+    .filter(v => typeMap[map[v]] === 1)
+    .map(v => `"${v}"`)
+    .join(' | ')}
+export type VersionFileFormat2 = ${Object.keys(map)
+    .filter(v => typeMap[map[v]] === 2)
+    .map(v => `"${v}"`)
+    .join(' | ')}
+export type VersionFileFormat3 = ${Object.keys(map)
+    .filter(v => typeMap[map[v]] === 3)
+    .map(v => `"${v}"`)
+    .join(' | ')}
+  `,
 )
 
 referenceFiles.forEach(x => {

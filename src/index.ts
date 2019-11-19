@@ -2,9 +2,9 @@ import fs from 'fs'
 import jszip from 'jszip'
 
 import { generateId as _generateId } from './generateId'
-import map from './json/map'
+import map, { VersionFileFormat1, VersionFileFormat2, VersionFileFormat3 } from './json/map'
 
-import FileFormat from '@sketch-hq/sketch-file-format-ts'
+import FileFormat, { FileFormat1, FileFormat2, FileFormat3 } from '@sketch-hq/sketch-file-format-ts'
 
 function readFile(filePath: string) {
   return new Promise<Buffer>((resolve, reject) => {
@@ -69,15 +69,74 @@ export const readSketchFile = async (filePath: string) => {
   }
 }
 
-export const createNewSketchFile = (
-  version?: string,
+type Content =
+  | {
+      document: FileFormat1.Document
+      meta: FileFormat1.Meta
+      user: FileFormat1.User
+      pages: FileFormat1.Page[]
+      images: { [id: string]: Buffer }
+    }
+  | {
+      document: FileFormat2.Document
+      meta: FileFormat2.Meta
+      user: FileFormat2.User
+      pages: FileFormat2.Page[]
+      images: { [id: string]: Buffer }
+    }
+  | {
+      document: FileFormat3.Document
+      meta: FileFormat3.Meta
+      user: FileFormat3.User
+      pages: FileFormat3.Page[]
+      images: { [id: string]: Buffer }
+    }
+
+export function createNewSketchFile(
+  version: VersionFileFormat3,
 ): {
-  document: FileFormat.Document
-  meta: FileFormat.Meta
-  user: FileFormat.User
-  pages: FileFormat.Page[]
+  document: FileFormat3.Document
+  meta: FileFormat3.Meta
+  user: FileFormat3.User
+  pages: FileFormat3.Page[]
   images: { [id: string]: Buffer }
-} => {
+}
+export function createNewSketchFile(
+  version: VersionFileFormat2,
+): {
+  document: FileFormat3.Document
+  meta: FileFormat3.Meta
+  user: FileFormat3.User
+  pages: FileFormat3.Page[]
+  images: { [id: string]: Buffer }
+}
+export function createNewSketchFile(
+  version: VersionFileFormat1,
+): {
+  document: FileFormat1.Document
+  meta: FileFormat1.Meta
+  user: FileFormat1.User
+  pages: FileFormat1.Page[]
+  images: { [id: string]: Buffer }
+}
+export function createNewSketchFile(
+  version: string,
+): {
+  document: FileFormat1.Document
+  meta: FileFormat1.Meta
+  user: FileFormat1.User
+  pages: FileFormat1.Page[]
+  images: { [id: string]: Buffer }
+}
+export function createNewSketchFile(): {
+  document: FileFormat1.Document
+  meta: FileFormat1.Meta
+  user: FileFormat1.User
+  pages: FileFormat1.Page[]
+  images: { [id: string]: Buffer }
+}
+
+export function createNewSketchFile(version?: string): Content {
   const documentId = _generateId()
   const pageId = _generateId()
 
@@ -92,25 +151,15 @@ export const createNewSketchFile = (
   }
 }
 
-export const writeSketchFile = (
-  {
-    document,
-    meta,
-    user,
-    pages,
-    images,
-  }: {
-    document: FileFormat.Document
-    meta: FileFormat.Meta
-    user: FileFormat.User
-    pages: FileFormat.Page[]
-    images: { [id: string]: Buffer }
-  },
+export function writeSketchFile(
+  { document, meta, user, pages, images }: Content,
   filePath: string,
-) => {
+): Promise<void> {
   const zip = new jszip()
-  pages.forEach(p => zip.file(`pages/${p.do_objectID}.json`, JSON.stringify(p)))
-  document.pages = pages.map(page => ({
+  ;(pages as FileFormat3.Page[]).forEach(p =>
+    zip.file(`pages/${p.do_objectID}.json`, JSON.stringify(p)),
+  )
+  document.pages = (pages as FileFormat3.Page[]).map(page => ({
     _class: 'MSJSONFileReference',
     _ref_class: 'MSImmutablePage',
     _ref: `pages/${page.do_objectID}`,
