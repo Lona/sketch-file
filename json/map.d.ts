@@ -12,3 +12,6 @@ declare const _default: {
     "57.1": number;
 };
 export default _default;
+export declare type VersionFileFormat1 = "55" | "56" | "57" | "55.1" | "55.2" | "56.1" | "56.2" | "56.3" | "57.1";
+export declare type VersionFileFormat2 = "58";
+export declare type VersionFileFormat3 = "59";

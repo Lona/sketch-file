@@ -2,3 +2,7 @@ node_modules
 package-lock.json
 .vscode
 src/json
+index.js
+index.d.ts
+generateId.js
+generateId.d.ts
