@@ -7,7 +7,7 @@ exports.default = (function (documentId) { return ({
     "currentPageIndex": 0,
     "assets": {
         "_class": "assetCollection",
-        "do_objectID": "05E78255-1DA3-4ECD-8035-8ED68D97EE6C",
+        "do_objectID": "C94E9FA2-9915-4DFE-87C0-7670678D8CBE",
         "images": [],
         "colorAssets": [],
         "exportPresets": [],
@@ -38,7 +38,7 @@ exports.default = (function (documentId) { return ({
         {
             "_class": "MSJSONFileReference",
             "_ref_class": "MSImmutablePage",
-            "_ref": "pages/AA5DF5B8-97FF-4A78-9AB0-47844B1A9444"
+            "_ref": "pages/DE768058-D22A-4C6E-A641-0B51C72599D2"
         }
     ]
 }); });
