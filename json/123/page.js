@@ -10,7 +10,6 @@ exports.default = (function (pageId) { return ({
     "isLocked": false,
     "isVisible": true,
     "layerListExpandedType": 0,
-    "maintainScrollPosition": false,
     "name": "Page 1",
     "nameIsFixed": false,
     "resizingConstraint": 63,
@@ -36,7 +35,7 @@ exports.default = (function (pageId) { return ({
     "hasClippingMask": false,
     "style": {
         "_class": "style",
-        "do_objectID": "C99ED58C-ECE8-4D28-999D-7204F0AFFCD9",
+        "do_objectID": "C2C70B67-8E6C-4336-AE3E-6974397A206B",
         "endMarkerType": 0,
         "miterLimit": 10,
         "startMarkerType": 0,

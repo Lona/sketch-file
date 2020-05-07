@@ -4,7 +4,7 @@ var sketch_file_format_ts_1 = require("@sketch-hq/sketch-file-format-ts");
 exports.default = (function (pageId) {
     var _a;
     return ({
-        "commit": "263281c53601afed11c5ffc64635380925727011",
+        "commit": "6896e2bfdb0a2a03f745e4054a8c5fc58565f9f1",
         "pagesAndArtboards": (_a = {},
             _a[pageId] = {
                 "name": "Page 1",
@@ -12,28 +12,28 @@ exports.default = (function (pageId) {
             },
             _a),
         // @ts-ignore
-        "version": 121,
+        "version": 123,
         "fonts": [],
         "compatibilityVersion": 99,
         "app": sketch_file_format_ts_1.FileFormat3.BundleId.PublicRelease,
         "autosaved": 0,
         "variant": "NONAPPSTORE",
         "created": {
-            "commit": "263281c53601afed11c5ffc64635380925727011",
+            "commit": "6896e2bfdb0a2a03f745e4054a8c5fc58565f9f1",
             // @ts-ignore
-            "appVersion": "61",
-            "build": 89581,
+            "appVersion": "63.1",
+            "build": 92452,
             "app": sketch_file_format_ts_1.FileFormat3.BundleId.PublicRelease,
             "compatibilityVersion": 99,
             // @ts-ignore
-            "version": 121,
+            "version": 123,
             "variant": "NONAPPSTORE"
         },
         "saveHistory": [
-            "NONAPPSTORE.89581"
+            "NONAPPSTORE.92452"
         ],
         // @ts-ignore
-        "appVersion": "61",
-        "build": 89581
+        "appVersion": "63.1",
+        "build": 92452
     });
 });

@@ -15,6 +15,7 @@ const typeMap = {
   119: 1,
   120: 2,
   121: 3,
+  123: 3,
 }
 
 fs.mkdirSync(path.join(__dirname, '../src/json'), { recursive: true })
